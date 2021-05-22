@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:insta_clone_flutter/screens/screens.dart';
 
 class CustomRouter //used to handle routing in the app
 {
@@ -7,17 +8,20 @@ class CustomRouter //used to handle routing in the app
       RouteSettings
           settings) //settings have name and args . To check the name for routing
   {
+    print("Route : ${settings.name}");
     switch (settings.name) {
       case '/':
-        MaterialPageRoute(
+        return MaterialPageRoute(
           settings: const RouteSettings(
               name:
                   '/'), //reason to specify route setting here is to look into analytics where user goes to
           builder: (_) => const Scaffold(),
         );
+      case SplashScreen.routeName:
+        return SplashScreen.route();
 
       default:
-        _errorRoute();
+        return _errorRoute();
     }
   }
 
