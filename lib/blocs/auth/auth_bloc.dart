@@ -23,14 +23,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   @override
   Future<void> close() {
-    _userSubscription?.cancel(); // ? because if in case subscription is not available for any reason and cancel will crash the app
+    _userSubscription
+        ?.cancel(); // ? because if in case subscription is not available for any reason and cancel will crash the app
     return super.close();
   }
 
   @override
-  Stream<AuthState> mapEventToState(
-    AuthEvent event,
-  ) async* {
+  Stream<AuthState> mapEventToState(AuthEvent event) async* {
     if (event is AuthUserChanged) {
       yield* _mapAuthUserChangedToState(event);
     } else if (event is AuthLogoutRequested) {

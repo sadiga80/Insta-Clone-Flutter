@@ -19,7 +19,6 @@ class AuthRepository extends BaseAuthRepository {
                 .instance; //after : assigning parameters to passed params
 
   @override
-  // TODO: implement user
   Stream<auth.User> get user => _firebaseAuth
       .userChanges(); //this functions notifies about the user updates
 

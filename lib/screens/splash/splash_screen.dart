@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:insta_clone_flutter/blocs/blocs.dart';
+import 'package:insta_clone_flutter/screens/screens.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key key}) : super(key: key);
@@ -20,12 +21,12 @@ class SplashScreen extends StatelessWidget {
     return WillPopScope(
       onWillPop: () async => false,
       child: BlocListener<AuthBloc, AuthState>(
+        listenWhen: (prevState, state) => prevState.status != state.status, //To prevent the BlocListener from being called multiple times when the AuthState status is the same
         listener: (context, state) {
-          print(state);
           if (state.status == AuthStatus.unauthenticated) {
-            //Goto login screen
+            Navigator.of(context).pushNamed(LoginScreen.routeName);
           } else if (state.status == AuthStatus.authenticated) {
-            //goto nav scren
+            Navigator.of(context).pushNamed(NavScreen.routeName);
           }
         },
         child: const Scaffold(
